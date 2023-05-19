@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Projeto_produtos;
 
 public class Produto
     {
@@ -7,33 +8,63 @@ public class Produto
         public string NomeProduto { get; set; }
         public float Preco { get; set; }
         public DateTime DataCadastro { get; set; }
-        public Projeto_produtos.Marca Marca { get; set; }
+        public Marca Marca = new Marca();
         public Usuario CadastradoPor { get; set; }
-        public List<Produto> ListaDeProdutos { get; set; }
+        List<Produto> ListaDeProdutos = new List<Produto>();
 
         public void Cadastrar()
         {
-            Console.WriteLine("Informe o código do produto:");
-            Codigo = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite o código do produto:");
+            NovoProduto.Codigo = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Informe o nome do produto:");
-            NomeProduto = Console.ReadLine();
+            Console.WriteLine("Digite o nome do produto:");
+            NovoProduto.NomeProduto = Console.ReadLine();
 
-            Console.WriteLine("Informe o preço do produto:");
-            Preco = float.Parse(Console.ReadLine());
+            Console.WriteLine("Digite o preço do produto:");
+            NovoProduto.Preco = float.Parse(Console.ReadLine());
 
-            DataCadastro = DateTime.Now;
+            ListaDeProdutos.Add(NovoProduto);
 
-            Console.WriteLine("Produto cadastrado com sucesso!");
+            NovoProduto.DataCadastro = DateTime.Now;
+
+            return "Produto cadastrado com sucesso!";
         }
 
-        public void Listar()
+        public List<Produto> Listar()
         {
-            
+            return new List<Produto>();
         }
 
-        public void Deletar(int codigo)
+        public string Deletar(Produto produto)
         {
-            
+            return "Produto deletado com sucesso!";
         }
+
+    internal void Deletar(int codigoProduto)
+    {
+        throw new NotImplementedException();
     }
+
+    internal void Cadastrar()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class Marca
+{
+    internal void Cadastrar()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void Deletar(int codigoMarca)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void Listar()
+    {
+        throw new NotImplementedException();
+    }
+}

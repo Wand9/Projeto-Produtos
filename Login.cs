@@ -3,13 +3,16 @@ using Projeto_produtos;
 
 public class Login
     {
-        public bool Logado { get; set; }
+    private object usuario;
+
+    public bool Logado { get; set; }
 
         public Login()
         {
             Usuario user = new Usuario();
 
             Logar(user);
+
             if (Logado == true)
             {
                 GerarMenu();
@@ -19,8 +22,7 @@ public class Login
         public void Logar(Usuario usuario)
         {
             Console.WriteLine("Faça login!");
-
-            Console.WriteLine("Insira seu e-mail cadastrado:");
+            Console.WriteLine("Insira seu email cadastrado:");
             string email = Console.ReadLine();
 
             Console.WriteLine("Insira sua senha:");
@@ -28,20 +30,27 @@ public class Login
 
             if (email == usuario.Email && senha == usuario.Senha)
             {
-                Logado = true;
-                Console.WriteLine("nLogin efetuado com sucesso!");
+                this.Logado = true;
+                Console.WriteLine("Login efetuado com sucesso!");
             }
             else
             {
-                Logado = false;
-                Console.WriteLine("E-mail ou senha incorretos!");
+                this.Logado = false;
+                Console.WriteLine("Email ou senha incorretos!");
             }
         }
 
-        public void Deslogar(Usuario usuario)
+        public void Deslogar()
         {
-            Logado = false;
-            Console.WriteLine("Usuário deslogado com sucesso!");
+             if (Usuario.Logado)
+            {
+                Logado = false;
+                Console.WriteLine($"Usuário {nome} deslogado com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Usuário já está deslogado!");
+            }
         }
 
         public void GerarMenu()
@@ -52,18 +61,19 @@ public class Login
             string opcao;
             do
             {
-                Console.WriteLine(" ------------------------- ");
+                Console.WriteLine("-------------------------");
                 Console.WriteLine("|                         |");
                 Console.WriteLine("|  1- Cadastrar Produto   |");
                 Console.WriteLine("|  2- Listar Produto      |");
                 Console.WriteLine("|  3- Remover Produto     |");
                 Console.WriteLine("|_________________________|");
+                Console.WriteLine("_________________________");
                 Console.WriteLine("|  4- Cadastrar Marca     |");
                 Console.WriteLine("|  5- Listar Marca        |");
                 Console.WriteLine("|  6- Remover Marca       |");
-                Console.WriteLine("-------------------------- ");
-                Console.WriteLine("|  0- Sair               | ");
-                Console.WriteLine("-------------------------- ");
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("| 0- Sair               |");
+                Console.WriteLine("-------------------------");
 
                 opcao = Console.ReadLine();
                 switch (opcao)
