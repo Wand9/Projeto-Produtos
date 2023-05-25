@@ -1,9 +1,3 @@
-﻿using System;
+﻿using Projeto_produto;
 
-class Program
-    {
-        static void Main(string[] args)
-        {
-            Login login = new Login();
-        }
-    }
+long Login = new Login();

@@ -1,50 +1,48 @@
-using System;
-using System.Collections.Generic;
-
-namespace Projeto_produtos
+namespace Projeto_produto
 {
     public class Marca
     {
         public int Codigo { get; set; }
         public string NomeMarca { get; set; }
-        public DateTime DataCadastro { get; set; }
-        List<Marca> ListaDeMarcas = new List<Marca>();
+        public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
 
-        public string Cadastrar()
+        public static List<Marca> listaDeMarcas = new List<Marca>();
+
+
+        public static void Cadastrar()
         {
-            Marca NovaMarca = new Marca();
+            Marca marca = new Marca();
 
-            Console.WriteLine("Digite o código da marca:");
-            NovaMarca.Codigo = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Digite o código da marca:");
+            marca.Codigo = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Digite o nome da marca:");
-            NovaMarca.NomeMarca = Console.ReadLine();
+            Console.WriteLine($"Digite o nome da Marca: ");
+            marca.NomeMarca = Console.ReadLine();
 
-            ListaDeMarcas.Add(NovaMarca);
+            listaDeMarcas.Add(marca);
 
-            NovaMarca.DataCadastro = DateTime.Now;
 
-            return "Marca cadastrada com sucesso!";
+
         }
-
-        public void Listar()
+        public static void Listar()
         {
-            foreach (var novaMarca in ListaDeMarcas)
+            foreach (var marca in listaDeMarcas)
             {
                 Console.WriteLine($"-------------------");
-                Console.WriteLine($"Codigo da Marca: {novaMarca.Codigo}");
-                Console.WriteLine($"Nome da Marca: {novaMarca.NomeMarca}");
-                Console.WriteLine($"Data do cadastro: {novaMarca.DataCadastro}");
+                Console.WriteLine($"Codigo do produto: {marca.Codigo}");
+                Console.WriteLine($"Nome do produto: {marca.NomeMarca}");
+                Console.WriteLine($"Data de cadastro: {marca.DataCadastro}");
                 Console.WriteLine($"-------------------");
+                
 
             }
-        }
 
-        public string Deletar(int Codigo)
+
+        }
+        public static void Deletar(int codigo)
         {
-            Marca marca = ListaDeMarcas.Find(x => x.Codigo == Codigo);
-            ListaDeMarcas.Remove(marca);
-            return "Marca deletada com sucesso!";
+            Marca marca = listaDeMarcas.Find(x => x.Codigo == codigo);
+            listaDeMarcas.Remove(marca);
         }
     }
 }

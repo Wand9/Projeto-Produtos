@@ -1,58 +1,46 @@
-using System;
-using Projeto_produtos;
-
-public class Login
+namespace Projeto_produto
+{
+    public class Login
     {
-    private object usuario;
-
-    public bool Logado { get; set; }
-
+        public bool Logado { get; set; }
         public Login()
         {
             Usuario user = new Usuario();
 
             Logar(user);
-
             if (Logado == true)
             {
                 GerarMenu();
+
             }
         }
-
         public void Logar(Usuario usuario)
         {
-            Console.WriteLine("Faça login!");
-            Console.WriteLine("Insira seu email cadastrado:");
+            Console.WriteLine($"Faça Login!");
+            Console.WriteLine($"Insira seu email cadastrado: ");
             string email = Console.ReadLine();
 
-            Console.WriteLine("Insira sua senha:");
+            Console.WriteLine($"Insira sua senha: ");
             string senha = Console.ReadLine();
 
             if (email == usuario.Email && senha == usuario.Senha)
             {
                 this.Logado = true;
-                Console.WriteLine("Login efetuado com sucesso!");
+                Console.WriteLine($"Login efetuado com sucesso!");
             }
             else
             {
                 this.Logado = false;
-                Console.WriteLine("Email ou senha incorretos!");
-            }
-        }
+                Console.WriteLine($"Falha ao logar!");
 
-        public void Deslogar()
+            }
+
+
+        }
+        public void Deslogar(Usuario usuario)
         {
-             if (Usuario.Logado)
-            {
-                Logado = false;
-                Console.WriteLine($"Usuário {nome} deslogado com sucesso!");
-            }
-            else
-            {
-                Console.WriteLine("Usuário já está deslogado!");
-            }
-        }
 
+        }
         public void GerarMenu()
         {
             Produto produto = new Produto();
@@ -80,33 +68,44 @@ public class Login
                 {
                     case "1":
                         produto.Cadastrar();
+
                         break;
                     case "2":
                         produto.Listar();
                         break;
                     case "3":
-                        Console.WriteLine("Informe o código do produto que deseja remover:");
+                        Console.WriteLine($"Informe o código do produto que deseja remover: ");
                         int codigoProduto = int.Parse(Console.ReadLine());
+
+
                         produto.Deletar(codigoProduto);
                         break;
                     case "4":
-                        marca.Cadastrar();
+                        Marca.Cadastrar();
                         break;
                     case "5":
-                        marca.Listar();
+                        Marca.Listar();
                         break;
                     case "6":
-                        Console.WriteLine("Informe o código da marca que deseja remover:");
+                        Console.WriteLine($"Informe o código da marca que deseja remover: ");
                         int codigoMarca = int.Parse(Console.ReadLine());
-                        marca.Deletar(codigoMarca);
+
+                        Marca.Deletar(codigoMarca);
+
                         break;
                     case "0":
-                        Console.WriteLine("App encerrado");
+                        Console.WriteLine($"App encerrado!");
                         break;
                     default:
-                        Console.WriteLine("Opção inválida!");
+                        Console.WriteLine($"Opção inválida!");
                         break;
                 }
             } while (opcao != "0");
         }
+
+        public static implicit operator long(Login v)
+        {
+            throw new NotImplementedException();
+        }
     }
+}
